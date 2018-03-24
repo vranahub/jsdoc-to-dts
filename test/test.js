@@ -1,133 +1,44 @@
-/* eslint-disable no-unused-vars,no-var,no-empty-function */
 'use strict';
-
-/**
- * The complete Triforce, or one or more components of the Triforce.
- * @typedef {object} Triforce
- * @property {boolean} hasCourage - Indicates whether the Courage component is present.
- * @property {boolean} hasPower - Indicates whether the Power component is present.
- * @property {boolean} hasWisdom - Indicates whether the Wisdom component is present.
- */
-
-/**
- * The complete Triforce, or one or more components of the Triforce.
- * @typedef Anon
- * @property {boolean} hasCourage - Indicates whether the Courage component is present.
- * @property {boolean} hasPower - Indicates whether the Power component is present.
- * @property {boolean} hasWisdom - Indicates whether the Wisdom component is present.
- */
-
-/**
- * A number, or a string containing a number.
- * @typedef {(number|string)} NumberLike
- */
 
 /**
  * Enum for tri-state values.
  * @readonly
  * @enum {number}
- * @constant
  */
 var triState = {
     /** The true value */
     TRUE: 1,
-    /** The false value */
     FALSE: -1,
     /** @type {boolean} */
-    MAYBE: true,
+    MAYBE: true
 };
 
 /**
  * @this OtherThing
  */
-function doStuff()
-{}
+function doStuff() {}
+
 
 /**
  * @class
  * @abstract
  */
-class OtherThing
-{
-    /**
-     *
-     */
-    copy() {}
-}
-
-/**
- *
- */
-class Stuff
-{
-    /**
-     *
-     */
-    doStuff()
-    {}
-}
-
-/**
- *
- */
-class Things
-{
-    /**
-     *
-     */
-    doThings()
-    {}
-}
-
-/**
- * Deep class #1
- *
- * @class
- */
-function DeepClass1() {
-    /**
-     * Deep class #2
-     *
-     * @class
-     */
-    function DeepClass2() {
-        /**
-         * Deep class #3
-         *
-         * @class
-         */
-        function DeepClass3() {
-            /**
-             * Deep class #4
-             *
-             * @class
-             */
-            function DeepClass4() {
-            }
-        }
-    }
-}
+class OtherThing {}
 
 /**
  * @class
  * @extends OtherThing
  * @mixes Stuff
  * @mixes Things
+ * @implements FinalThing
  */
 class MyThing extends OtherThing
 {
     /**
-     * @typedef Something
-     * @type boolean
-     * @memberof MyThing
-     */
-
-    /**
      * Constructs!
-     * @param {...number} a - The number.
-     * @private
+     * @param {number|string} a - The number.
      */
-    constructor(...a)
+    constructor(a)
     {
         super();
 
@@ -138,31 +49,14 @@ class MyThing extends OtherThing
          * @readonly
          */
         this.derp = 'me';
-
-        /**
-         * @private
-         * @member {number}
-         */
-        this.something = 1;
-
-        /**
-         * @member {Object<string, Array<(number|string)>>}
-         */
-        this.map = {};
-
-        /**
-         * @member {Array<Array.<Array<Array.<string[]>>>>}
-         */
-        this.superArray = {};
     }
 
     /**
      * Creates a new thing.
      *
-     * @param {!testns.CircleOptions} opts - Namespace test!
      * @return {MyThing} the new thing.
      */
-    static create(opts)
+    static create()
     {
         return new MyThing();
     }
@@ -177,34 +71,16 @@ class MyThing extends OtherThing
     }
 
     /**
-     * Gets a Promise that will resolve with an Object.
-     *
-     * @return {Promise<Object>} The Promise
-     */
-     promiseMe() {};
-
-    /**
      * Gets derp.
      *
      * @member {string}
      */
-    get D()
-    {
-        return this.derp;
-    }
+    get D() { return this.derp; }
 
     /**
      * Sets derp
      *
      * @param {string} v - The value to set to.
      */
-    set D(v)
-    {
-        this.derp = v;
-    }
+    set D(v) { this.derp = v; }
 }
-
-/**
- * @prop {number} Thingy
- */
-MyThing.me = 10;

@@ -1,4 +1,4 @@
-# jsdoc2tsd
+# jsdoc2dts
 
 ## Warning: Highly Experimental
 
@@ -8,42 +8,15 @@ file (or many files) and output a single TypeScript Declaration File (.d.ts).
 It is distributed as a JSDoc3 template. Running jsdoc with this as the template should
 result in a TypeScript Definition File.
 
-## Installation
-
-You can install this module from npm:
-
-```
-$> npm install tsd-jsdoc
-```
-
-## Usage
-
-To use this module, simply specify it as the template for your normal jsdoc generation.
-
-For example, from the command-line you can do:
-
-```
-$> jsdoc -t node_modules/tsd-jsdoc -r .
-```
-
-Or add this to your JSON configuration:
-
-```json
-{
-    "opts": {
-        "template": "./node_modules/tsd-jsdoc"
-    }
-}
-```
-
 ## Gotchas
 
 ### Validation
 
-This library provides very little validation beyond what jsdoc provides. Meaning if you
+This library provides almost no validation beyong what jsdoc provides. Meaning if you
 have invalid jsodc comments, this will likely output an invalid TypeScript Definition File.
+On the brightside, that means you will find invalid jsdoc pretty quickly.
 
-Additionally there are things that jsdoc allows, that TypeScript does not.
+Additionally there are things that jsdoc things are fine, that TypeScript does not.
 One example would be a member variable marked with `@constant`. While that is valid
 jsdoc, it is not valid TS:
 
@@ -55,7 +28,7 @@ class MyClass {
 
 So there a few cases like this where the jsdoc is massaged into valid TS.
 
-### `module:`
+### `module:...`
 
 This syntax is used to link to another module's docs. If you use it
 to describe the code, it will be ignored.
@@ -89,8 +62,7 @@ describe `Loader` and then just use `@extends Loader`.
 ### Method/Member Overrides
 
 Any method or member that has the same name as one in the parent of a child class
-will be ignored in the Child class, unless it is a method with different parameters
-that *is not* marked with the `@override` tag.
+will be ignored.
 
 For example, this JavaScript:
 
@@ -107,14 +79,6 @@ class Parent {
          */
         this.someprop = true;
     }
-
-    /**
-     */
-    amethod() {}
-
-    /**
-     */
-    bmethod() {}
 }
 
 /**
@@ -130,17 +94,6 @@ class Child extends Parent {
          */
         this.someprop = false;
     }
-
-    /**
-     * @override
-     * @param {object} opt - Does stuff.
-     */
-    amethod(opt) {}
-
-    /**
-     * @param {object} opt - Does stuff.
-     */
-    bmethod(opt) {}
 }
 ```
 
@@ -149,12 +102,9 @@ Will generate this declaration:
 ```ts
 class Parent {
     someprop: boolean;
-
-    amethod(): void;
 }
 
 class Child extends Parent {
-    bmethod(opt): void;
 }
 ```
 
@@ -165,12 +115,12 @@ Tags that describe the code, but support is not implemented are:
 - [`@default`](http://usejsdoc.org/tags-default.html) - No TS equivalent
 - [`@deprecated`](http://usejsdoc.org/tags-deprecated.html) - No TS equivalent ([issue](https://github.com/Microsoft/TypeScript/issues/390))
 - [`@event`](http://usejsdoc.org/tags-event.html) - No TS equivalent
-- [`@exports`](http://usejsdoc.org/tags-exports.html) - Everything is exported since it is a definition file.
-- [`@external`](http://usejsdoc.org/tags-external.html) - **Not Yet Implemented**
+- [`@exports`](http://usejsdoc.org/tags-exports.html) - **Unimplemented**
+- [`@external`](http://usejsdoc.org/tags-external.html) - **Unimplemented**
 - [`@fires`](http://usejsdoc.org/tags-fires.html) - No TS equivalent
 - [`@listens`](http://usejsdoc.org/tags-listens.html) - No TS equivalent
 - [`@override`](http://usejsdoc.org/tags-override.html) - No TS equivalent ([issue](https://github.com/Microsoft/TypeScript/issues/2000))
-- [`@this`](http://usejsdoc.org/tags-this.html) - **Not Yet Implemented**
+- [`@readonly`](http://usejsdoc.org/tags-readonly.html) - No TS equivalent (implemented in v2)
 - [`@throws`](http://usejsdoc.org/tags-throws.html) - No TS equivalent
 
 Additionally, tags that are just metadata and don't actually describe
@@ -191,11 +141,4 @@ the code are ignored. These are:
 - [`@tutorial`](http://usejsdoc.org/tags-tutorial.html)
 - [`@version`](http://usejsdoc.org/tags-version.html)
 
-All other jsdoc tags should work fine.
-
-## Supported ClosureCompiler Tags
-
-ClosureCompiler has a couple tags beyond the built-in jsdoc tags that can improve your TypeScript output. Here is a complete
-list of the tags from CC that are supported in this template:
-
-- [`@template`](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler#template-t) - For generics
+All other tags *should* work...
