@@ -1,4 +1,4 @@
-# jsdoc2tsd
+# jsdoc2dts
 
 ## Warning: Highly Experimental
 
@@ -13,7 +13,7 @@ result in a TypeScript Definition File.
 You can install this module from npm:
 
 ```
-$> npm install jsdoc2tsd
+$> npm install jsdoc2dts
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ To use this module, simply specify it as the template for your normal jsdoc gene
 For example, from the command-line you can do:
 
 ```
-$> jsdoc -t node_modules/jsdoc2tsd -r .
+$> jsdoc -t node_modules/jsdoc2dts index.js
 ```
 
 Or add this to your JSON configuration:
@@ -31,10 +31,12 @@ Or add this to your JSON configuration:
 ```json
 {
     "opts": {
-        "template": "./node_modules/jsdoc2tsd"
+        "template": "./node_modules/jsdoc2dts"
     }
 }
 ```
+
+In the end of execution, an file called `index.d.ts` will be created on the root of your project.
 
 ## Gotchas
 
