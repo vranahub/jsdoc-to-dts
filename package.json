@@ -1,6 +1,6 @@
 {
   "name": "jsdoc2dts",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Generates TypeScript definition files (*.d.ts) from JSDoc Annotations.",
   "main": "publish.js",
   "author": "vranahub",
