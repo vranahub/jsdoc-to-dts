@@ -252,21 +252,22 @@ function getTypeName(obj) {
 }
 
 function handleNamespace(docs, element, parent) {
-    // comment
-    writeComment(element.comment);
+    if (element && element.name) {
+        // comment
+        writeComment(element.comment);
 
-    if (element.scope === 'global')
-        write('export ');
+        if (element.scope === 'global')
+            write('export ');
+        // header
+        writeLn(`module ${element.name} {`);
 
-    // header
-    writeLn(`module ${element.name} {`);
+        // children
+        handleChildren(docs, element);
 
-    // children
-    handleChildren(docs, element);
-
-    // done
-    writeLn('}');
-    endLine();
+        // done
+        writeLn('}');
+        endLine();
+    }
 }
 
 function handleFunction(docs, element, parent, isConstructor) {
@@ -501,4 +502,5 @@ function isInterface(e) {
 function findChildrenOf(docs, longname) {
     return docs.filter((e) => e.memberof === longname);
 }
+
 
